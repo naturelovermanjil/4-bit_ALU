@@ -1,4 +1,25 @@
--- Testbench for 4-Bit Adder
+-- 4-Bit ALU Design in VHDL--
+-------------------------------------------------------------------------------
+-- Title      : COMP.CE.240
+-- Project    : 
+-------------------------------------------------------------------------------
+-- File       : 4-bit adder.vhd
+-- Author     : Group 27: Tomas Rinne & Manjil Basnet
+-- Company    : TUT/DCS
+-- Created    : 20023-03-11
+-- Platform   : 
+-- Standard   : VHDL'87
+-----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author  Description
+-- 2023-03-11  1.0      Group 27    Created
+-------------------------------------------------------------------------------
+
+
+
+
+-- Testbench for 4-Bit Adder--
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
