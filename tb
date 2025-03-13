@@ -1,0 +1,55 @@
+-- Testbench for 4-Bit Adder
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity FourBitAdder_tb is
+end FourBitAdder_tb;
+
+architecture Behavioral of FourBitAdder_tb is
+    -- Inputs
+    signal A    : std_logic_vector(3 downto 0);
+    signal B    : std_logic_vector(3 downto 0);
+    signal Cin  : std_logic;
+
+    -- Outputs
+    signal Sum  : std_logic_vector(3 downto 0);
+    signal Cout : std_logic;
+
+    -- Instantiate the Unit Under Test (UUT)
+    component FourBitAdder
+        Port (
+            A    : in  std_logic_vector(3 downto 0);
+            B    : in  std_logic_vector(3 downto 0);
+            Cin  : in  std_logic;
+            Sum  : out std_logic_vector(3 downto 0);
+            Cout : out std_logic
+        );
+    end component;
+
+begin
+    -- Instantiate the UUT
+    uut: FourBitAdder
+        port map (
+            A    => A,
+            B    => B,
+            Cin  => Cin,
+            Sum  => Sum,
+            Cout => Cout
+        );
+
+    -- Test process
+    process
+    begin
+        -- Test case 1: 4 + 5 = 9, Cin = 0
+        A <= "0100"; B <= "0101"; Cin <= '0'; wait for 10 ns;
+
+        -- Test case 2: 7 + 8 = 15, Cin = 0
+        A <= "0111"; B <= "1000"; Cin <= '0'; wait for 10 ns;
+
+        -- Test case 3: 7 + 8 + 1 = 16 (carry), Cin = 1
+        A <= "0111"; B <= "1000"; Cin <= '1'; wait for 10 ns;
+
+        wait;  -- End simulation
+    end process;
+
+end Behavioral;
