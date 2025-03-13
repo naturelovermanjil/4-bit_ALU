@@ -1,0 +1,38 @@
+-- 4-Bit ALU Design in VHDL
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity ALU_4bit is
+    Port (
+        A     : in  std_logic_vector(3 downto 0);  -- 4-bit input A
+        B     : in  std_logic_vector(3 downto 0);  -- 4-bit input B
+        op    : in  std_logic_vector(2 downto 0);  -- 3-bit operation code
+        outp  : out std_logic_vector(3 downto 0);  -- 4-bit output
+        zero  : out std_logic                     -- Zero flag (1 if output is zero)
+    );
+end ALU_4bit;
+
+architecture Behavioral of ALU_4bit is
+    signal temp : std_logic_vector(3 downto 0);  -- Temporary signal for output
+begin
+    process(A, B, op)
+    begin
+        case op is
+            when "000" => temp <= A + B;          -- Addition
+            when "001" => temp <= A - B;          -- Subtraction
+            when "010" => temp <= A and B;        -- Bitwise AND
+            when "011" => temp <= A or B;         -- Bitwise OR
+            when "100" => temp <= A xor B;        -- Bitwise XOR
+            when "101" => temp <= not A;          -- Bitwise NOT (on A)
+            when "110" => temp <= A(2 downto 0) & '0'; -- Logical left shift (A shifted left by 1)
+            when "111" => temp <= '0' & A(3 downto 1); -- Logical right shift (A shifted right by 1)
+            when others => temp <= "0000";        -- Default case (output zero)
+        end case;
+
+        -- Assign outputs
+        outp <= temp;
+        zero <= '1' when temp = "0000" else '0';  -- Set the zero flag
+    end process;
+end Behavioral;
